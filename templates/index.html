@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConsumeWise Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Basic Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body, html {
+        height: 100%;
+        font-family: 'Open Sans', sans-serif;
+        background: #eceff1;
+        color: #212529;
+        line-height: 1.6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+      }
+
+      /* Container for the entire page content */
+      .container {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 800px;
+        width: 100%;
+        margin-top: 50px;
+      }
+
+      /* Header styling */
+      .header {
+        background-color: #3949ab;
+        color: #fff;
+        padding: 20px 40px;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 2rem;
+      }
+
+      /* Form Styling */
+      .form-group {
+        padding: 30px 40px;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      input[type='file'],
+      input[type='text'] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        line-height: 1.6;
+        font-size: 1rem;
+      }
+
+      /* Analyze Button */
+      button[type='submit'] {
+        display: block;
+        width: 100%;
+        padding: 15px 20px;
+        background-color: #5c6bc0;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.2s ease-out;
+      }
+
+      button[type='submit']:hover {
+        background-color: #3f51b5;
+      }
+
+      /* Results area */
+      .results {
+        padding: 20px 40px;
+        background: #ffffff;
+        margin-top: 30px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        color: #333;
+        max-height: 500px; /* Manage the height */
+        overflow-y: auto; /* For vertical scroll */
+        word-wrap: break-word; /* Break long words */
+        white-space: pre-wrap; /* Preserve spaces and line breaks */
+      }
+
+      .results h2 {
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      /* Interactivity */
+      button[type='submit'],
+      input[type='file'],
+      input[type='text'] {
+        transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+      }
+
+      button[type='submit']:hover,
+      input[type='file']:hover,
+      input[type='text']:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        body, html {
+          padding: 15px;
+        }
+
+        .container {
+          margin-top: 20px;
+        }
+
+        .form-group, .results {
+          padding: 15px;
+        }
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Product Analysis Form</h1>
+        </div>
+        <div class="form-group">
+            <form action="/analyze" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" required>
+                <input type="text" name="claims" placeholder="Enter product Ingredients" required>
+                <button type="submit">Analyze</button>
+            </form>
+        </div>
+        {% if response %}
+            <div class="results">
+                <h2>Analysis Result:</h2>
+                <p>{{ response | safe }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
